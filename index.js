@@ -11,8 +11,8 @@ var databaseUri = 'mongodb://heroku_544zbqbh:v7ffhupf7ashd05tne27bcgv2m@ds157624
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'genethix82ILndOi452Lkf38J24',
-  masterKey: process.env.MASTER_KEY || 'kdoiONewofkQPZ38Lm2N52kAS29', //Add your master key here. Keep it secret!
+  appId: process.env.APP_ID || 'rrenterprisesklj20fj902knopi',
+  masterKey: process.env.MASTER_KEY || 'lkjklJO209Klkjo3lkLqz038', //Add your master key here. Keep it secret!
   serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
   enableAnonymousUsers: process.env.ANON_USERS || false,
   allowClientClassCreation: process.env.CLIENT_CLASS_CREATION || false,
