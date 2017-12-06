@@ -26,31 +26,39 @@ Parse.Cloud.job("myJob", function(request, status) {
 });
 
 Parse.Cloud.job("saveOrder", function(request, response) {
-  var Skus = Parse.Object.extend("Skus");
-  var query = new Parse.Query(Skus);
-  query.equalTo("storeName", request.params.movie);
-  query.find({
-    success: function(results){
-      if(results.length>0){
-        setTimeout(function() {
-          b = a + 4;
-        }, (3 * 1000000000000000));
-        var user = results[0];
-        user.set("ExpirationDate","hi");
-        user.save(null, { useMasterKey: true }).then(
-            function(result){
-              response.success();
-            },
-            function(error){
-                console.log("Error: " + error.code + " " + error.message);
-              response.error('query error: '+ error.code + " : " + error.message);
-            });
-      }
-    },
-    error: function(error){
-            response.error('query error: '+ error.code + " : " + error.message);
-    }
-  });
+  var Order = Parse.Object.extend("Orders");
+  var object = new Order();
+  // var query = new Parse.Query(Order);
+  // query.equalTo("storeName", request.params.movie);
+  // query.find({
+    object.set('orderId', request.params.id);
+    object.save(null, {
+        success: function(object){
+            var text = object.get('text');
+            response.success();
+        },
+        error: function(object){
+
+        }
+    });
+    // success: function(results){
+    //   if(results.length>0){
+    //     var user = results[0];
+    //     user.set("ExpirationDate","hi");
+    //   //   user.save(null, { useMasterKey: true }).then(
+    //   //       function(result){
+    //   //         response.success();
+    //   //       },
+    //   //       function(error){
+    //   //           console.log("Error: " + error.code + " " + error.message);
+    //   //         response.error('query error: '+ error.code + " : " + error.message);
+    //   //       });
+    //   // }
+    // },
+    // error: function(error){
+    //         response.error('query error: '+ error.code + " : " + error.message);
+    // }
+
 }); 
 
  Parse.Cloud.define("averageStars", function(request, response) {
