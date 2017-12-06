@@ -32,7 +32,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
   query.find({
     success: function(results){
       if(results.length>0){
-        for (i = 0; i < 10000000000; i++) { 
+        for (i = 0; i < 10000; i++) { 
     
           }
         var user = results[0];
