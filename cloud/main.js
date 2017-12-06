@@ -26,7 +26,7 @@ Parse.Cloud.job("myJob", function(request, status) {
 });
 
  Parse.Cloud.define("averageStars", function(request, response) {
-  var Review = Parse.Object.extend("Skus");
+  var Skus = Parse.Object.extend("Skus");
   var query = new Parse.Query(Skus);
   query.equalTo("storeName", request.params.movie);
   query.find({
