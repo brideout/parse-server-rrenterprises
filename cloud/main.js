@@ -5,17 +5,27 @@ Parse.Cloud.define('hello', function(req, res) {
 
 
  Parse.Cloud.define("averageStars", function(request, response) {
-  var Review = Parse.Object.extend("Review");
-  var query = new Parse.Query(Review);
-  query.equalTo("movie", request.params.movie);
-  query.find().then(function(results) {
-    var sum = 0;
-    for (var i = 0; i < results.length; ++i) {
-      sum += results[i].get("stars");
+  var Review = Parse.Object.extend("Skus");
+  var query = new Parse.Query(Skus);
+  query.equalTo("storeName", request.params.movie);
+  query.find({
+    success: function(results){
+      if(results.length>0){
+        var user = results[0];
+        user.set("ExpirationDate","hi");
+        user.save(null, { useMasterKey: true }).then(
+            function(result){
+              response.success();
+            },
+            function(error){
+                console.log("Error: " + error.code + " " + error.message);
+              response.error('query error: '+ error.code + " : " + error.message);
+            });
+      }
+    },
+    error: function(error){
+            response.error('query error: '+ error.code + " : " + error.message);
     }
-    response.success(sum / results.length);
-  }, function(error) {
-    response.error("movie lookup failed");
   });
 });                  
 
