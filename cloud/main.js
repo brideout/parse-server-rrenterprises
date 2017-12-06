@@ -4,7 +4,7 @@ Parse.Cloud.define('hello', function(req, res) {
 });
 
 Parse.Cloud.define("testJob", function(request, response) {
-  var GameScore = Parse.Object.extend("Skus");
+  var GameScore = Parse.Object.extend("GameScore");
   var gameScore = new GameScore();
 
   gameScore.set("score", 1337);
