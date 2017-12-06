@@ -25,6 +25,31 @@ Parse.Cloud.job("myJob", function(request, status) {
   });
 });
 
+Parse.Cloud.job("saveOrder", function(request, response) {
+  var Skus = Parse.Object.extend("Skus");
+  var query = new Parse.Query(Skus);
+  query.equalTo("storeName", request.params.movie);
+  query.find({
+    success: function(results){
+      if(results.length>0){
+        var user = results[0];
+        user.set("ExpirationDate","hi");
+        user.save(null, { useMasterKey: true }).then(
+            function(result){
+              response.success();
+            },
+            function(error){
+                console.log("Error: " + error.code + " " + error.message);
+              response.error('query error: '+ error.code + " : " + error.message);
+            });
+      }
+    },
+    error: function(error){
+            response.error('query error: '+ error.code + " : " + error.message);
+    }
+  });
+}); 
+
  Parse.Cloud.define("averageStars", function(request, response) {
   var Skus = Parse.Object.extend("Skus");
   var query = new Parse.Query(Skus);
