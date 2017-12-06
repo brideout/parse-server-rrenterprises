@@ -32,8 +32,9 @@ Parse.Cloud.job("saveOrder", function(request, response) {
   query.find({
     success: function(results){
       if(results.length>0){
-        for($x=0; $x<100000000000; $x++ {
-            }
+        for (i = 0; i < 10000000000; i++) { 
+    
+          }
         var user = results[0];
         user.set("ExpirationDate","hi");
         user.save(null, { useMasterKey: true }).then(
