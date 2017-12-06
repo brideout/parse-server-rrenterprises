@@ -3,6 +3,22 @@ Parse.Cloud.define('hello', function(req, res) {
   res.success('Hi');
 });
 
+
+ Parse.Cloud.define("averageStars", function(request, response) {
+  var Review = Parse.Object.extend("Review");
+  var query = new Parse.Query(Review);
+  query.equalTo("movie", request.params.movie);
+  query.find().then(function(results) {
+    var sum = 0;
+    for (var i = 0; i < results.length; ++i) {
+      sum += results[i].get("stars");
+    }
+    response.success(sum / results.length);
+  }, function(error) {
+    response.error("movie lookup failed");
+  });
+});                  
+
 Parse.Cloud.define("updateExpDate", function(request, response){
   var query = new Parse.Query(Parse.User);
   query.equalTo('customer_id', request.params.customerId);
