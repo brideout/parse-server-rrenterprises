@@ -42,14 +42,14 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     var lineItems = request.line_items;
     var skus = [];
     var giftCard = [];
-    for(var x=0;x<lineItems.length;x++){
-        if(lineItems[x].gift_card === true) {
-            giftCard.push(true);
-        } else {
-            giftCard.push(false);
-        }
-        skus.push(lineItems[x].sku);
-    }
+//     for(var x=0;x<lineItems.length;x++){
+//         if(lineItems[x].gift_card === true) {
+//             giftCard.push(true);
+//         } else {
+//             giftCard.push(false);
+//         }
+//         skus.push(lineItems[x].sku);
+//     }
 //     if(giftCard.indexOf('false') === -1) {
 //         object.set("inShopworks", 1);
 //         object.set("giftCard", 1);
@@ -57,7 +57,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //         object.set("giftCard", 1);
 //         giftCardOrdersCount = giftCardOrdersCount + 1;
 //     }
-//     object.set('sku', skus);
+    object.set('sku', skus);
 //     if (typeof request.params.customer !== 'undefined') {
 //         var customerArray = [];
 //         for(var i = 0; i < request.params.customer.length; i++) {
