@@ -31,7 +31,63 @@ Parse.Cloud.job("saveOrder", function(request, response) {
   // var query = new Parse.Query(Order);
   // query.equalTo("storeName", request.params.movie);
   // query.find({
+    var giftCardOnlyOrdersCount = 0;
+    var giftCardOrdersCount = 0;
+
     object.set('orderId', request.params.id);
+    object.set('subTotal', request.params.subtotal_price);
+    object.set('grandTotal', request.params.total_price);
+    object.set('orderNumber', request.params.order_number);
+    object.set('note', request.params.note);
+    var lineItems = request.line_items;
+    var skus = [];
+    var giftCard = [];
+    for(var x=0;x<lineItems.length;x++){
+        if(lineItems[x].gift_card === true) {
+            giftCard.push(true);
+        } else {
+            giftCard.push(false);
+        }
+        skus.push(lineItems[x].sku);
+    }
+    if(giftCard.indexOf('false') === -1) {
+        object.set("inShopworks", 1);
+        object.set("giftCard", 1);
+    } else if(giftCard.indexOf('true') > -1) {
+        object.set("giftCard", 1);
+        giftCardOrdersCount = giftCardOrdersCount + 1;
+    }
+    object.set('sku', skus);
+    if (typeof request.params.customer !== 'undefined') {
+        var customerArray = [];
+        for(var i = 0; i < request.params.customer.length; i++) {
+            customerArray.push(request.params.customer[i][name]);
+        }
+        object.set("customer", customerArray);
+    } else {
+        object.set("customer", ["no"]);
+    }
+    object.set("discountCode", request.params.discount_codes);
+    object.set("totalDiscounts", request.params.total_discounts);
+    if(typeof request.params.shipping_address !== 'undefined') {
+        var shippingAddressArray = [];
+        for(var s=0;s<request.params.shipping_address.length; s++) {
+            shippingAddressArray.push(request.params.shipping_address[s][name]);
+        }
+        object.set('shippingAddress', shippingAddressArray);
+        object.set('shippingLines', request.params.shipping_lines);
+    } else {
+        object.set("shippingAddress", ["no"]);
+        object.set("shippingLines", ["no"]);
+    }
+    if(typeof request.params.tax_lines !== 'undefined') {
+        object.set('taxes', request.params.tax_lines);
+    } else {
+        object.set('taxes', ["no"]);
+    }
+    // object.set("storeName", store);
+    object.set('gateway', request.params.payment_gateway_names);
+    object.set("lineItems", request.params.line_items);
     object.save(null, {
         success: function(object){
             var text = object.get('text');
