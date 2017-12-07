@@ -39,24 +39,24 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set('grandTotal', request.params.total_price);
     object.set('orderNumber', request.params.order_number);
     object.set('note', request.params.note);
-    var lineItems = request.line_items;
-    var skus = [];
-    var giftCard = [];
-    for(var x=0;x<lineItems.length;x++){
-        if(lineItems[x].gift_card === true) {
-            giftCard.push(true);
-        } else {
-            giftCard.push(false);
-        }
-        skus.push(lineItems[x].sku);
-    }
-    if(giftCard.indexOf('false') === -1) {
-        object.set("inShopworks", 1);
-        object.set("giftCard", 1);
-    } else if(giftCard.indexOf('true') > -1) {
-        object.set("giftCard", 1);
-        giftCardOrdersCount = giftCardOrdersCount + 1;
-    }
+//     var lineItems = request.line_items;
+//     var skus = [];
+//     var giftCard = [];
+//     for(var x=0;x<lineItems.length;x++){
+//         if(lineItems[x].gift_card === true) {
+//             giftCard.push(true);
+//         } else {
+//             giftCard.push(false);
+//         }
+//         skus.push(lineItems[x].sku);
+//     }
+//     if(giftCard.indexOf('false') === -1) {
+//         object.set("inShopworks", 1);
+//         object.set("giftCard", 1);
+//     } else if(giftCard.indexOf('true') > -1) {
+//         object.set("giftCard", 1);
+//         giftCardOrdersCount = giftCardOrdersCount + 1;
+//     }
     object.set('sku', skus);
 //     if (typeof request.params.customer !== 'undefined') {
 //         var customerArray = [];
@@ -87,7 +87,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //     }
     // object.set("storeName", store);
     object.set('gateway', request.params.payment_gateway_names);
-    object.set("lineItems", request.params.line_items);
+//     object.set("lineItems", request.params.line_items);
     object.save(null, {
         success: function(object){
             var text = object.get('text');
