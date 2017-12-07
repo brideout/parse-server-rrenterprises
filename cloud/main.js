@@ -26,11 +26,11 @@ Parse.Cloud.job("myJob", function(request, status) {
 });
 
 Parse.Cloud.job("saveOrder", function(request, response) {
-    var Order = Parse.Object.extend("Orders");
-    var object = new Order();
-    // var query = new Parse.Query(Order);
-    // query.equalTo("storeName", request.params.movie);
-    // query.find({
+  var Order = Parse.Object.extend("Orders");
+  var object = new Order();
+  // var query = new Parse.Query(Order);
+  // query.equalTo("storeName", request.params.movie);
+  // query.find({
     var giftCardOnlyOrdersCount = 0;
     var giftCardOrdersCount = 0;
 
@@ -71,13 +71,13 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set("totalDiscounts", request.params.total_discounts);
     if(typeof request.params.shipping_address !== 'undefined') {
         var shippingAddressArray = [];
-        var shippingAddress = request.params.shipping_address;
-        var xlength = shippingAddress.length;
-        for(var s=0; s < xlength; s++) {
+        var shippingAddress = request.params.shipping_address; 
+      var xlength = shippingAddress.length;
+        for(var s=0; s < 3; s++) {
             shippingAddressArray.push(shippingAddress[Object.keys(shippingAddress)[s]]);
 //           shippingAddressArray.push("hi");
 //           var obj = { first: 'someVal' };
-// obj[Object.keys(obj)[0]];
+// obj[Object.keys(obj)[0]]; 
         }
         object.set('shippingAddress', shippingAddressArray);
         object.set('shippingLines', request.params.shipping_lines);
