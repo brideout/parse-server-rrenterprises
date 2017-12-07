@@ -43,7 +43,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     var skus = [];
     var giftCard = [];
     for(var x=0;x<lineItems.length;x++){
-        if(lineItems[x].gift_card === true) {
+        if(lineItems[x]["gift_card"] === true) {
             giftCard.push(true);
         } else {
             giftCard.push(false);
