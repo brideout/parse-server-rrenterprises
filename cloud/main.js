@@ -85,7 +85,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     } else {
         object.set('taxes', ["no"]);
     }
-    object.set("storeName", store);
+//     object.set("storeName", store);
     object.set('gateway', request.params.payment_gateway_names);
     object.set("lineItems", request.params.line_items);
     object.save(null, {
