@@ -58,40 +58,40 @@ Parse.Cloud.job("saveOrder", function(request, response) {
         giftCardOrdersCount = giftCardOrdersCount + 1;
     }
     object.set('sku', skus);
-    if (typeof request.params.customer !== 'undefined') {
-        var customerArray = [];
-        for(var i = 0; i < request.params.customer.length; i++) {
-            customerArray.push(request.params.customer[i][name]);
-        }
-        object.set("customer", customerArray);
-    } else {
-        object.set("customer", ["no"]);
-    }
-    object.set("discountCode", request.params.discount_codes);
-    object.set("totalDiscounts", request.params.total_discounts);
-    if(typeof request.params.shipping_address !== 'undefined') {
-        var shippingAddressArray = [];
-        for(var s=0;s<request.params.shipping_address.length; s++) {
-            shippingAddressArray.push(request.params.shipping_address[s][name]);
-        }
-        object.set('shippingAddress', shippingAddressArray);
-        object.set('shippingLines', request.params.shipping_lines);
-    } else {
-        object.set("shippingAddress", ["no"]);
-        object.set("shippingLines", ["no"]);
-    }
-    if(typeof request.params.tax_lines !== 'undefined') {
-        object.set('taxes', request.params.tax_lines);
-    } else {
-        object.set('taxes', ["no"]);
-    }
+//     if (typeof request.params.customer !== 'undefined') {
+//         var customerArray = [];
+//         for(var i = 0; i < request.params.customer.length; i++) {
+//             customerArray.push(request.params.customer[i][name]);
+//         }
+//         object.set("customer", customerArray);
+//     } else {
+//         object.set("customer", ["no"]);
+//     }
+//     object.set("discountCode", request.params.discount_codes);
+//     object.set("totalDiscounts", request.params.total_discounts);
+//     if(typeof request.params.shipping_address !== 'undefined') {
+//         var shippingAddressArray = [];
+//         for(var s=0;s<request.params.shipping_address.length; s++) {
+//             shippingAddressArray.push(request.params.shipping_address[s][name]);
+//         }
+//         object.set('shippingAddress', shippingAddressArray);
+//         object.set('shippingLines', request.params.shipping_lines);
+//     } else {
+//         object.set("shippingAddress", ["no"]);
+//         object.set("shippingLines", ["no"]);
+//     }
+//     if(typeof request.params.tax_lines !== 'undefined') {
+//         object.set('taxes', request.params.tax_lines);
+//     } else {
+//         object.set('taxes', ["no"]);
+//     }
     // object.set("storeName", store);
     object.set('gateway', request.params.payment_gateway_names);
     object.set("lineItems", request.params.line_items);
     object.save(null, {
         success: function(object){
             var text = object.get('text');
-            response.success();
+//             response.success();
         },
         error: function(object){
 
