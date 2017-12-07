@@ -61,7 +61,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     if (typeof request.params.customer !== 'undefined') {
         var customerArray = [];
         for(var i = 0; i < request.params.customer.length; i++) {
-            customerArray.push(request.params.customer[i][name]);
+            customerArray.push(request.params.customer[i]);
         }
         object.set("customer", customerArray);
     } else {
@@ -72,7 +72,8 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     if(typeof request.params.shipping_address !== 'undefined') {
         var shippingAddressArray = [];
         for(var s=0;s<request.params.shipping_address.length; s++) {
-            shippingAddressArray.push(request.params.shipping_address[s][name]);
+//             shippingAddressArray.push(request.params.shipping_address[s][name]);
+          shippingAddressArray.push("hi");
         }
         object.set('shippingAddress', shippingAddressArray);
         object.set('shippingLines', request.params.shipping_lines);
