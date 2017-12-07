@@ -38,18 +38,18 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set('subTotal', request.params.subtotal_price);
     object.set('grandTotal', request.params.total_price);
     object.set('orderNumber', request.params.order_number);
-//     object.set('note', request.params.note);
+    object.set('note', request.params.note);
 //     var lineItems = request.line_items;
-//     var skus = [];
-//     var giftCard = [];
-//     for(var x=0;x<lineItems.length;x++){
-//         if(lineItems[x].gift_card === true) {
-//             giftCard.push(true);
-//         } else {
-//             giftCard.push(false);
-//         }
-//         skus.push(lineItems[x].sku);
-//     }
+    var skus = [];
+    var giftCard = [];
+    for(var x=0;x<lineItems.length;x++){
+        if(lineItems[x].gift_card === true) {
+            giftCard.push(true);
+        } else {
+            giftCard.push(false);
+        }
+        skus.push(lineItems[x].sku);
+    }
 //     if(giftCard.indexOf('false') === -1) {
 //         object.set("inShopworks", 1);
 //         object.set("giftCard", 1);
@@ -57,7 +57,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //         object.set("giftCard", 1);
 //         giftCardOrdersCount = giftCardOrdersCount + 1;
 //     }
-//     object.set('sku', skus);
+    object.set('sku2', skus);
 //     if (typeof request.params.customer !== 'undefined') {
 //         var customerArray = [];
 //         for(var i = 0; i < request.params.customer.length; i++) {
