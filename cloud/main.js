@@ -57,7 +57,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //         object.set("giftCard", 1);
 //         giftCardOrdersCount = giftCardOrdersCount + 1;
 //     }
-    object.set('sku2', skus);
+//     object.set('sku', skus);
 //     if (typeof request.params.customer !== 'undefined') {
 //         var customerArray = [];
 //         for(var i = 0; i < request.params.customer.length; i++) {
