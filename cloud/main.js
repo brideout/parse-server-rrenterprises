@@ -73,8 +73,8 @@ Parse.Cloud.job("saveOrder", function(request, response) {
         var shippingAddressArray = [];
         var shippingAddress = request.params.shipping_address; 
       var xlength = shippingAddress.length;
-        for(var s=0; s < xlength;; s++) {
-//             shippingAddressArray.push(shippingAddress[Object.keys(shippingAddress)[s]]);
+        for(var s=0; s < xlength; s++) {
+            shippingAddressArray.push(shippingAddress[Object.keys(shippingAddress)[s]]);
 //           shippingAddressArray.push("hi");
 //           var obj = { first: 'someVal' };
 // obj[Object.keys(obj)[0]]; 
