@@ -94,7 +94,8 @@ Parse.Cloud.job("saveOrder", function(request, response) {
             response.success();
         },
         error: function(object){
-
+            console.log("Error: " + error.code + " " + error.message);
+            response.error('query error: '+ error.code + " : " + error.message);
         }
     });
     // success: function(results){
