@@ -71,7 +71,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set("totalDiscounts", request.params.total_discounts);
     if(typeof request.params.shipping_address !== 'undefined') {
         var shippingAddressArray = [];
-        for(var s=0;s<request.params.shipping_address.length; s++) {
+        for(var s=0;s<2; s++) {
 //             shippingAddressArray.push(request.params.shipping_address[s][name]);
           shippingAddressArray.push("hi");
         }
