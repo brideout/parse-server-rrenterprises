@@ -4,6 +4,7 @@
 var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
+var shopifyAPI = require('shopify-node-api');
 
 var databaseUri = 'mongodb://heroku_qphgm0pv:269fjf9ulntucikkqav9h4jb6i@ds117316.mlab.com:17316/heroku_qphgm0pv';
 
@@ -19,6 +20,12 @@ var api = new ParseServer({
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
+});
+
+var Shopify = new shopifyAPI({
+    shop: 'https://rapidware.myshopify.com',// MYSHOP.myshopify.com
+    shopify_api_key: 'e2f4c217881b1ac594b692be0817b461', // Your API key
+    access_token: '1d473411cd507320627284dad7797ace' // Your API password
 });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:

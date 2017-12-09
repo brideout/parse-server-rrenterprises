@@ -1,11 +1,4 @@
 
-var shopifyAPI = require('shopify-node-api');
-
-var Shopify = new shopifyAPI({
-    shop: 'https://rapidware.myshopify.com',// MYSHOP.myshopify.com
-    shopify_api_key: 'e2f4c217881b1ac594b692be0817b461', // Your API key
-    access_token: '1d473411cd507320627284dad7797ace' // Your API password
-});
 
 Parse.Cloud.job("myJob", function(request, status) {
   // the params passed through the start request
@@ -101,6 +94,10 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.save(null, {
         success: function(object){
             var text = object.get('text');
+            Shopify.get('/admin/products.json', query_data, function(err, data, headers){
+                console.log(data); // Data contains product json information
+                // console.log(headers); // Headers returned from request
+            });
             response.success();
         },
         error: function(object){
