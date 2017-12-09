@@ -93,7 +93,8 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //     object.set("storeName", store);
     object.set('gateway', request.params.payment_gateway_names);
     object.set("lineItems", request.params.line_items);
-    object.set("data", request.params);
+    object.set("dateOrdered", request.params.created_at_date);
+    object.set("storeName", request.params.store);
     object.save(null, {
         success: function(object){
             var text = object.get('text');
