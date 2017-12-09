@@ -1,6 +1,10 @@
 
-Parse.Cloud.define('hello', function(req, res) {
-  res.success('Hi');
+var shopifyAPI = require('shopify-node-api');
+
+var Shopify = new shopifyAPI({
+    shop: 'https://rapidware.myshopify.com',// MYSHOP.myshopify.com
+    shopify_api_key: 'e2f4c217881b1ac594b692be0817b461', // Your API key
+    access_token: '1d473411cd507320627284dad7797ace' // Your API password
 });
 
 Parse.Cloud.job("myJob", function(request, status) {
@@ -104,24 +108,6 @@ Parse.Cloud.job("saveOrder", function(request, response) {
             response.error('query error: '+ error.code + " : " + error.message);
         }
     });
-    // success: function(results){
-    //   if(results.length>0){
-    //     var user = results[0];
-    //     user.set("ExpirationDate","hi");
-    //   //   user.save(null, { useMasterKey: true }).then(
-    //   //       function(result){
-    //   //         response.success();
-    //   //       },
-    //   //       function(error){
-    //   //           console.log("Error: " + error.code + " " + error.message);
-    //   //         response.error('query error: '+ error.code + " : " + error.message);
-    //   //       });
-    //   // }
-    // },
-    // error: function(error){
-    //         response.error('query error: '+ error.code + " : " + error.message);
-    // }
-
 }); 
 
  Parse.Cloud.define("averageStars", function(request, response) {
@@ -147,28 +133,11 @@ Parse.Cloud.job("saveOrder", function(request, response) {
             response.error('query error: '+ error.code + " : " + error.message);
     }
   });
-});                  
-
-Parse.Cloud.define("updateExpDate", function(request, response){
-  var query = new Parse.Query(Parse.User);
-  query.equalTo('customer_id', request.params.customerId);
-  query.find({
-    success: function(results){
-      if(results.length>0){
-        var user = results[0];
-        user.set("ExpirationDate",[request.params.ExpirationDate]);
-        user.save(null, { useMasterKey: true }).then(
-            function(result){
-              response.success();
-            },
-            function(error){
-                console.log("Error: " + error.code + " " + error.message);
-              response.error('query error: '+ error.code + " : " + error.message);
-            });
-      }
-    },
-    error: function(error){
-            response.error('query error: '+ error.code + " : " + error.message);
-    }
-  });
 });
+
+ Parse.Cloud.define("getProducts", function (request, response) {
+     Shopify.get('/admin/products.json', query_data, function(err, data, headers){
+         console.log(data); // Data contains product json information
+         // console.log(headers); // Headers returned from request
+     });
+ });
