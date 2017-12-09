@@ -130,14 +130,14 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 });
 
 //  Parse.Cloud.define("getProducts", function (request, response) {
-//      Shopify.get('/admin/products.json', query_data, function(err, data, headers){
-//          console.log(data); // Data contains product json information
-//          console.log(headers); // Headers returned from request
-//          console.log(err);
-//      });
-Shopify.get('/admin/products.json', query_data, function(err, data, headers){
-                console.log(data); // Data contains product json information
-                // console.log(headers); // Headers returned from request
-            });
-     response.success();
+// //      Shopify.get('/admin/products.json', query_data, function(err, data, headers){
+// //          console.log(data); // Data contains product json information
+// //          console.log(headers); // Headers returned from request
+// //          console.log(err);
+// //      });
+// Shopify.get('/admin/products.json', query_data, function(err, data, headers){
+//                 console.log(data); // Data contains product json information
+//                 // console.log(headers); // Headers returned from request
+//             });
+//      response.success();
 //  });
