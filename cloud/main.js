@@ -98,12 +98,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set("lineItems", request.params.line_items);
     object.set("dateOrdered", request.params.created_at_date);
     object.set("storeName", request.params.store);
-    Shopify.get('/admin/products.json', query_data, function(err, data, headers){
-         console.log(data); // Data contains product json information
-         console.log(headers); // Headers returned from request
-         console.log(err);
-        response.success();
-     });
+   
     object.save(null, {
         success: function(object){
             var text = object.get('text');
