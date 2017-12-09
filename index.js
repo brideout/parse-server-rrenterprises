@@ -22,11 +22,11 @@ var api = new ParseServer({
   }
 });
 
-var Shopify = new shopifyAPI({
-    shop: 'https://rapidware.myshopify.com',// MYSHOP.myshopify.com
-    shopify_api_key: 'e2f4c217881b1ac594b692be0817b461', // Your API key
-    access_token: '1d473411cd507320627284dad7797ace' // Your API password
-});
+// var Shopify = new shopifyAPI({
+//     shop: 'https://rapidware.myshopify.com',// MYSHOP.myshopify.com
+//     shopify_api_key: 'e2f4c217881b1ac594b692be0817b461', // Your API key
+//     access_token: '1d473411cd507320627284dad7797ace' // Your API password
+// });
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey

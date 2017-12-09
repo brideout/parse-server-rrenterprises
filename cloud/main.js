@@ -1,4 +1,9 @@
 
+var Shopify = new shopifyAPI({
+    shop: 'https://rapidware.myshopify.com',// MYSHOP.myshopify.com
+    shopify_api_key: 'e2f4c217881b1ac594b692be0817b461', // Your API key
+    access_token: '1d473411cd507320627284dad7797ace' // Your API password
+});
 
 Parse.Cloud.job("myJob", function(request, status) {
   // the params passed through the start request
