@@ -102,6 +102,10 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.save(null, {
         success: function(object){
             var text = object.get('text');
+            function callback(err, data, headers) {
+  var api_limit = headers['http_x_shopify_shop_api_call_limit'];
+  console.log( api_limit ); // "1/40" 
+}
             response.success();
         },
         error: function(object){
