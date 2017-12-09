@@ -98,6 +98,11 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set("lineItems", request.params.line_items);
     object.set("dateOrdered", request.params.created_at_date);
     object.set("storeName", request.params.store);
+    Shopify.get('/admin/products.json', query_data, function(err, data, headers){
+         console.log(data); // Data contains product json information
+         console.log(headers); // Headers returned from request
+         console.log(err);
+     });
     object.save(null, {
         success: function(object){
             var text = object.get('text');
@@ -135,14 +140,11 @@ Parse.Cloud.job("saveOrder", function(request, response) {
   });
 });
 
- Parse.Cloud.define("getProducts", function (request, response) {
+//  Parse.Cloud.define("getProducts", function (request, response) {
 //      Shopify.get('/admin/products.json', query_data, function(err, data, headers){
 //          console.log(data); // Data contains product json information
 //          console.log(headers); // Headers returned from request
 //          console.log(err);
 //      });
-     response.success();
-     if(1=2) {
-         response.error("hi");
-     }
- });
+//      response.success();
+//  });
