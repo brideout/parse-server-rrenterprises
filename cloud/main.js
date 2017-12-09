@@ -142,4 +142,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //          console.log(err);
 //      });
      response.success();
+     if(1=2) {
+         response.error("hi");
+     }
  });
