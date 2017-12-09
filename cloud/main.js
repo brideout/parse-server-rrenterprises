@@ -60,8 +60,11 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set('sku', skus);
     if (typeof request.params.customer !== 'undefined') {
         var customerArray = [];
-        for(var i = 0; i < request.params.customer.length; i++) {
+        var customerInfo = request.params.customer;
+        var ylength = customerInfo.length;
+        for(var i = 0; i < ylength; i++) {
             customerArray.push(request.params.customer[i]);
+            customerArray.push(customerInfo[Object.keys(customerInfo)[i]]);
         }
         object.set("customer", customerArray);
     } else {
@@ -73,11 +76,8 @@ Parse.Cloud.job("saveOrder", function(request, response) {
         var shippingAddressArray = [];
         var shippingAddress = request.params.shipping_address; 
       var xlength = shippingAddress.length;
-        for(var s=0; s < 3; s++) {
+        for(var s=0; s < xlength; s++) {
             shippingAddressArray.push(shippingAddress[Object.keys(shippingAddress)[s]]);
-//           shippingAddressArray.push("hi");
-//           var obj = { first: 'someVal' };
-// obj[Object.keys(obj)[0]]; 
         }
         object.set('shippingAddress', shippingAddressArray);
         object.set('shippingLines', request.params.shipping_lines);
