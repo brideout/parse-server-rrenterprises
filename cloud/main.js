@@ -67,6 +67,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
             customerArray.push(customerInfo[Object.keys(customerInfo)[i]]);
         }
         object.set("customer", customerArray);
+        object.set("customer2", request.params.customer);
     } else {
         object.set("customer", ["no"]);
     }
