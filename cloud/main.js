@@ -102,6 +102,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
          console.log(data); // Data contains product json information
          console.log(headers); // Headers returned from request
          console.log(err);
+        response.success();
      });
     object.save(null, {
         success: function(object){
