@@ -63,7 +63,6 @@ Parse.Cloud.job("saveOrder", function(request, response) {
         var customerInfo = request.params.customer;
         var ylength = Object.keys(customerInfo).length;
         for(var i = 0; i < ylength; i++) {
-            customerArray.push(request.params.customer[i]);
             customerArray.push(customerInfo[Object.keys(customerInfo)[i]]);
         }
         object.set("customer", customerArray);
