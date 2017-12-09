@@ -99,11 +99,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
    
     object.save(null, {
         success: function(object){
-            var text = object.get('text');
-            Shopify.get('/admin/products.json', query_data, function(err, data, headers){
-                console.log(data); // Data contains product json information
-                // console.log(headers); // Headers returned from request
-            });
+            var text = object.get('text');   
             response.success();
         },
         error: function(object){
@@ -144,5 +140,9 @@ Parse.Cloud.job("saveOrder", function(request, response) {
 //          console.log(headers); // Headers returned from request
 //          console.log(err);
 //      });
-//      response.success();
+Shopify.get('/admin/products.json', query_data, function(err, data, headers){
+                console.log(data); // Data contains product json information
+                // console.log(headers); // Headers returned from request
+            });
+     response.success();
 //  });
