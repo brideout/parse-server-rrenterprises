@@ -76,7 +76,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
             shippingAddressArray.push(shippingAddress[Object.keys(shippingAddress)[s]]);
         }
         // object.set('shippingAddress', shippingAddressArray); 2
-        object.set('shippingAddress2', request.params.shipping_address);
+        object.set('shippingAddress', request.params.shipping_address);
         object.set('shippingLines', request.params.shipping_lines);
     } else {
         object.set("shippingAddress", ["no"]);
