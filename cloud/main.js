@@ -105,6 +105,84 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     });
 }); 
 
+Parse.Cloud.job("orderUpdated", function(request, response) {
+  var Order = Parse.Object.extend("Orders");
+  var query = new Parse.Query(Order);
+  query.equalTo("orderId", request.params.id);
+  query.equalTo("storeName", request.params.store);
+  query.find({
+    success: function(results) {
+      var object = results[0];
+      var giftCardOnlyOrdersCount = 0;
+      var giftCardOrdersCount = 0;
+
+      object.set('orderId', request.params.id);
+      object.set('subTotal', request.params.subtotal_price);
+      object.set('grandTotal', request.params.total_price);
+      object.set('orderNumber', request.params.order_number);
+      object.set('note', request.params.note);
+      var lineItems = request.params.line_items;
+      var skus = [];
+      var giftCard = [];
+      for(var x=0;x<lineItems.length;x++){ 
+          skus.push(lineItems[x].sku);
+      }
+      object.set('sku', skus);
+      if (typeof request.params.customer !== 'undefined') {
+          var customerArray = [];
+          var customerInfo = request.params.customer;
+          var ylength = Object.keys(customerInfo).length;
+          for(var i = 0; i < ylength; i++) {
+              customerArray.push(customerInfo[Object.keys(customerInfo)[i]]);
+          }
+          object.set("customer", customerInfo);
+      } else {
+          object.set("customer", ["no"]);
+      }
+      object.set("discountCode", request.params.discount_codes);
+      object.set("totalDiscounts", request.params.total_discounts);
+      if(typeof request.params.shipping_address !== 'undefined') {
+          var shippingAddressArray = [];
+          var shippingAddress = request.params.shipping_address; 
+        var xlength = Object.keys(shippingAddress).length;
+          for(var s=0; s < xlength; s++) {
+              shippingAddressArray.push(shippingAddress[Object.keys(shippingAddress)[s]]);
+          }
+          // object.set('shippingAddress', shippingAddressArray); 2
+          object.set('shippingAddress', request.params.shipping_address);
+          object.set('shippingLines', request.params.shipping_lines);
+      } else {
+          object.set("shippingAddress", ["no"]);
+          object.set("shippingLines", ["no"]);
+      }
+      if(typeof request.params.tax_lines !== 'undefined') {
+          object.set('taxes', request.params.tax_lines);
+      } else {
+          object.set('taxes', ["no"]);
+      }
+  //     object.set("storeName", store);
+      object.set('gateway', request.params.payment_gateway_names);
+      object.set("lineItems", request.params.line_items);
+      object.set("storeName", request.params.store);
+
+      object.save(null, {
+          success: function(object){
+              var text = object.get('text');   
+              response.success();
+          },
+          error: function(object){
+              console.log("Error: " + error.code + " " + error.message);
+              response.error('query error: '+ error.code + " : " + error.message);
+          }
+      });
+    },
+    error: function(error) {
+      console.log("Error: " + error.code + " " + error.message);
+      response.error('query error: '+ error.code + " : " + error.message);
+    }
+  });
+}); 
+
  Parse.Cloud.define("averageStars", function(request, response) {
   var Skus = Parse.Object.extend("Skus");
   var query = new Parse.Query(Skus);
