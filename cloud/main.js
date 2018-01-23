@@ -23,7 +23,7 @@ Parse.Cloud.job("myJob", function(request, status) {
 });
 
 Parse.Cloud.job("test", function(request, response) {
-  status.success("I am done");
+  response.success("I am done");
 });
 
 Parse.Cloud.job("saveOrder", function(request, response) {
