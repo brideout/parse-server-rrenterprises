@@ -65,7 +65,7 @@ Parse.Cloud.job("test", function(request, response) {
   for(var y=0;y<duplicateIds.length;y++) {
        var Orders2 = Parse.Object.extend("Orders");
       var query2 = new Parse.Query(Orders2);
-      query2.equalTo("orderId", duplicateIds[y]);
+      query2.equalTo("orderId", 200877113364777);
       query2.find({
         success: function(results) {
           var resultsCount = results.length;
