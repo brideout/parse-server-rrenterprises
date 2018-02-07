@@ -23,6 +23,7 @@ Parse.Cloud.job("myJob", function(request, status) {
 });
 
 Parse.Cloud.job("test", function(request, response) {
+  var duplicateIds = [];
   var Order = Parse.Object.extend("Orders");
   var query = new Parse.Query(Order);
   var currentDate = new Date(new Date().getTime());
@@ -37,20 +38,22 @@ Parse.Cloud.job("test", function(request, response) {
 //       var object = results[0];
       var orders = [];
       var orderIds = [];
+     
       for(var x=0;x<results.length;x++){ 
         if(orderIds.indexOf(results[x].orderId) === -1) {
           orderIds.push(results[x].orderId);
           orders.push(results[x]);
          } else {
-           results[x].destroy({
-            success: function(myObject) {
-             response.success("Success");
-          },
-            error: function(myObject, error) {
-               console.log("Error: " + error.code + " " + error.message);
-                response.error('query error: '+ error.code + " : " + error.message);
-          }
-          });
+           duplicateIds.push(results[x].orderId);
+//            results[x].destroy({
+//             success: function(myObject) {
+//              response.success("Success");
+//           },
+//             error: function(myObject, error) {
+//                console.log("Error: " + error.code + " " + error.message);
+//                 response.error('query error: '+ error.code + " : " + error.message);
+//           }
+//           });
          }
       }
     },
@@ -59,7 +62,34 @@ Parse.Cloud.job("test", function(request, response) {
       response.error('query error: '+ error.code + " : " + error.message);
     }
   });
-//   response.success("I am done");
+  for(var y=0;y<duplicateIds.length;y++ {
+       var Orders = Parse.Object.extend("Orders");
+      var query2 = new Parse.Query(Orders);
+      query2.equalTo("orderId", duplicateIds[y]);
+      query2.find({
+        success: function(results) {
+          var resultsCount = results.length;
+          for(var x=0;x<resultsCount;x++){ 
+            if(results[x].inShopworks !== 1 && x < resultsCount - 1) {
+                 results[x].destroy({
+                  success: function(myObject) {
+                   response.success("Success");
+                },
+                  error: function(myObject, error) {
+                     console.log("Error: " + error.code + " " + error.message);
+                      response.error('query error: '+ error.code + " : " + error.message);
+                }
+                });
+             }     
+          }
+        },
+        error: function(error) {
+          console.log("Error: " + error.code + " " + error.message);
+          response.error('query error: '+ error.code + " : " + error.message);
+        }
+      });
+    }
+  response.success("I am done");
 });
 
 Parse.Cloud.job("saveOrder", function(request, response) {
