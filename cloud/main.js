@@ -23,6 +23,42 @@ Parse.Cloud.job("myJob", function(request, status) {
 });
 
 Parse.Cloud.job("test", function(request, response) {
+  var Order = Parse.Object.extend("Orders");
+  var query = new Parse.Query(Order);
+  var currentDate = new Date(new Date().getTime());
+  var day = currentDate.getDate()
+  var month = currentDate.getMonth() +1
+  var year = currentDate.getFullYear()
+//   document.write(day + "/" + month + "/" + year)
+  query.equalTo("dateOrdered", day + "/" + month + "/" + year);
+  query.equalTo("storeName", "CC");
+  query.find({
+    success: function(results) {
+//       var object = results[0];
+      var orders = [];
+      var orderIds = [];
+      for(var x=0;x<results.length;x++){ 
+        if(orderIds.indexOf(results[x].orderId) === -1) {
+          orderIds.push(results[x].orderId);
+          orders.push(results[x]);
+         } else {
+           results[x].destroy({
+            success: function(myObject) {
+             response.success();
+          },
+            error: function(myObject, error) {
+               console.log("Error: " + error.code + " " + error.message);
+                response.error('query error: '+ error.code + " : " + error.message);
+          }
+          });
+         }
+      }
+    },
+    error: function(error) {
+      console.log("Error: " + error.code + " " + error.message);
+      response.error('query error: '+ error.code + " : " + error.message);
+    }
+  });
   response.success("I am done");
 });
 
