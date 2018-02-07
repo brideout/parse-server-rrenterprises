@@ -62,33 +62,33 @@ Parse.Cloud.job("test", function(request, response) {
       response.error('query error: '+ error.code + " : " + error.message);
     }
   });
-  for(var y=0;y<duplicateIds.length;y++ {
-       var Orders = Parse.Object.extend("Orders");
-      var query2 = new Parse.Query(Orders);
-      query2.equalTo("orderId", duplicateIds[y]);
-      query2.find({
-        success: function(results) {
-          var resultsCount = results.length;
-          for(var x=0;x<resultsCount;x++){ 
-            if(results[x].inShopworks !== 1 && x < resultsCount - 1) {
-                 results[x].destroy({
-                  success: function(myObject) {
-                   response.success("Success");
-                },
-                  error: function(myObject, error) {
-                     console.log("Error: " + error.code + " " + error.message);
-                      response.error('query error: '+ error.code + " : " + error.message);
-                }
-                });
-             }     
-          }
-        },
-        error: function(error) {
-          console.log("Error: " + error.code + " " + error.message);
-          response.error('query error: '+ error.code + " : " + error.message);
-        }
-      });
-    }
+//   for(var y=0;y<duplicateIds.length;y++ {
+//        var Orders = Parse.Object.extend("Orders");
+//       var query2 = new Parse.Query(Orders);
+//       query2.equalTo("orderId", duplicateIds[y]);
+//       query2.find({
+//         success: function(results) {
+//           var resultsCount = results.length;
+//           for(var x=0;x<resultsCount;x++){ 
+//             if(results[x].inShopworks !== 1 && x < resultsCount - 1) {
+//                  results[x].destroy({
+//                   success: function(myObject) {
+//                    response.success("Success");
+//                 },
+//                   error: function(myObject, error) {
+//                      console.log("Error: " + error.code + " " + error.message);
+//                       response.error('query error: '+ error.code + " : " + error.message);
+//                 }
+//                 });
+//              }     
+//           }
+//         },
+//         error: function(error) {
+//           console.log("Error: " + error.code + " " + error.message);
+//           response.error('query error: '+ error.code + " : " + error.message);
+//         }
+//       });
+//     }
   response.success("I am done");
 });
 
