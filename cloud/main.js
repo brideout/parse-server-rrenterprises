@@ -40,6 +40,10 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set('grandTotal', request.params.total_price);
     object.set('orderNumber', request.params.order_number);
     object.set('note', request.params.note);
+    var paymentGateways = request.params.payment_gateway_names;
+    if(paymentGateways.indexOf("gift_card") > -1 {
+       object.set("inShopworks", 1);
+     }
     var lineItems = request.params.line_items;
     var skus = [];
     var giftCard = [];
@@ -52,7 +56,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
         skus.push(lineItems[x].sku);
     }
     if(giftCard.indexOf('false') === -1) {
-        object.set("inShopworks", 1);
+//         object.set("inShopworks", 1);
         object.set("giftCard", 1);
     } else if(giftCard.indexOf('true') > -1) {
         object.set("giftCard", 1);
