@@ -30,7 +30,7 @@ Parse.Cloud.job("test", function(request, response) {
   var month = currentDate.getMonth() +1
   var year = currentDate.getFullYear()
 //   document.write(day + "/" + month + "/" + year)
-  query.equalTo("dateOrdered", day + "/" + month + "/" + year);
+  query.equalTo("dateOrdered","0"+ month + "/0" + day + "/" + year);
   query.equalTo("storeName", "CC");
   query.find({
     success: function(results) {
@@ -44,7 +44,7 @@ Parse.Cloud.job("test", function(request, response) {
          } else {
            results[x].destroy({
             success: function(myObject) {
-             response.success();
+             response.success("Success");
           },
             error: function(myObject, error) {
                console.log("Error: " + error.code + " " + error.message);
@@ -59,7 +59,7 @@ Parse.Cloud.job("test", function(request, response) {
       response.error('query error: '+ error.code + " : " + error.message);
     }
   });
-  response.success("I am done");
+//   response.success("I am done");
 });
 
 Parse.Cloud.job("saveOrder", function(request, response) {
