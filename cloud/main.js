@@ -41,7 +41,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     object.set('orderNumber', request.params.order_number);
     object.set('note', request.params.note);
     var paymentGateways = request.params.payment_gateway_names;
-    if(paymentGateways.indexOf("gift_card") > -1 {
+    if(paymentGateways.indexOf("gift_card") > -1) {
        object.set("inShopworks", 1);
      }
     var lineItems = request.params.line_items;
