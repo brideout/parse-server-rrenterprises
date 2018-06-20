@@ -106,7 +106,7 @@ Parse.Cloud.job("testOrder", function(request, response) {
             response.error('query error: '+ error.code + " : " + error.message);
         }
     });
-}
+});
 
 
 Parse.Cloud.job("saveOrder", function(request, response) {
