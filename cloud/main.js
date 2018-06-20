@@ -92,6 +92,23 @@ Parse.Cloud.job("test", function(request, response) {
   response.success("I am done");
 });
 
+Parse.Cloud.job("testOrder", function(request, response) {
+  var Order = Parse.Object.extend("Orders");
+  var object = new Order();
+  object.set('orderId', 12345);
+  object.save(null, {
+        success: function(object){
+            var text = object.get('text');   
+            response.success();
+        },
+        error: function(object){
+            console.log("Error: " + error.code + " " + error.message);
+            response.error('query error: '+ error.code + " : " + error.message);
+        }
+    });
+}
+
+
 Parse.Cloud.job("saveOrder", function(request, response) {
   var Order = Parse.Object.extend("Orders");
   var object = new Order();
