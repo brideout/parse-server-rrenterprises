@@ -114,7 +114,7 @@ Parse.Cloud.define("testOrder", function(request, response) {
 });
 
 
-Parse.Cloud.job("saveOrder", function(request, response) {
+Parse.Cloud.define("saveOrder", function(request, response) {
   var Order = Parse.Object.extend("Orders");
   var object = new Order();
   // var query = new Parse.Query(Order);
@@ -201,7 +201,7 @@ Parse.Cloud.job("saveOrder", function(request, response) {
     });
 }); 
 
-Parse.Cloud.job("orderUpdated", function(request, response) {
+Parse.Cloud.define("orderUpdated", function(request, response) {
   var Order = Parse.Object.extend("Orders");
   var query = new Parse.Query(Order);
   query.equalTo("orderId", request.params.id);
