@@ -92,11 +92,11 @@ Parse.Cloud.job("test", function(request, response) {
   response.success("I am done");
 });
 
-Parse.Cloud.job("testOrder", function(request, response) {
+Parse.Cloud.define("testOrder", function(request, response) {
    const log = request.log;
 
   // Update the Job status message
-  status.message("I just started");
+//   status.message("I just started");
   console.log("hi");
   var Order = Parse.Object.extend("Orders");
   var object = new Order();
