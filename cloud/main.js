@@ -97,6 +97,7 @@ Parse.Cloud.job("testOrder", function(request, response) {
 
   // Update the Job status message
   status.message("I just started");
+  console.log("hi");
   var Order = Parse.Object.extend("Orders");
   var object = new Order();
   object.set('orderId', 12345);
