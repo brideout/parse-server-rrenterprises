@@ -158,7 +158,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
         for(var i = 0; i < ylength; i++) {
             customerArray.push(customerInfo[Object.keys(customerInfo)[i]]);
         }
-        object.set("customer", customerInfo);
+        object.set("customer2", JSON.stringify(customerInfo));
     } else {
         object.set("customer", ["no"]);
     }
