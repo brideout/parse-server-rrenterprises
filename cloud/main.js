@@ -122,6 +122,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
   // query.find({
     var giftCardOnlyOrdersCount = 0;
     var giftCardOrdersCount = 0;
+    json.parse(request.params);
 
     object.set('orderId', request.params.id);
     object.set('subTotal', request.params.subtotal_price);
