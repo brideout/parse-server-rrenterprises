@@ -189,6 +189,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
     object.set("dateOrdered", request.params.created_at_date);
     object.set("dateOrderedTime", request.params.dateOrderedTime);
     object.set("storeName", request.params.store);
+    object.set("financialStatus", request.params.financial_status);
    
     object.save(null, {
         success: function(object){
@@ -261,6 +262,7 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
       object.set('gateway', request.params.payment_gateway_names);
       object.set("lineItems", request.params.line_items);
       object.set("storeName", request.params.store);
+      object.set("financialStatus", request.params.financial_status);
 
       object.save(null, {
           success: function(object){
