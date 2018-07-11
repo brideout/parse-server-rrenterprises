@@ -92,27 +92,6 @@ Parse.Cloud.job("test", function(request, response) {
   response.success("I am done");
 });
 
-Parse.Cloud.define("testOrder", function(request, response) {
-   const log = request.log;
-
-  // Update the Job status message
-//   status.message("I just started");
-  console.log("hi");
-  var Order = Parse.Object.extend("Orders");
-  var object = new Order();
-  object.set('orderId', 12345);
-  object.save(null, {
-        success: function(object){
-            var text = object.get('text');   
-            response.success();
-        },
-        error: function(object){
-            console.log("Error: " + error.code + " " + error.message);
-            response.error('query error: '+ error.code + " : " + error.message);
-        }
-    });
-});
-
 
 Parse.Cloud.define("saveOrder", function(request, response) {
   var Order = Parse.Object.extend("Orders");
@@ -263,6 +242,9 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
       object.set("lineItems", request.params.line_items);
       object.set("storeName", request.params.store);
       object.set("financialStatus", request.params.financial_status);
+      if(typeof request.params.closed_at !== 'undefined') {
+        object.set("archived", "2");
+      }
 
       object.save(null, {
           success: function(object){
