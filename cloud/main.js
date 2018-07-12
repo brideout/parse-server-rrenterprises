@@ -169,7 +169,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
     object.set("dateOrderedTime", request.params.dateOrderedTime);
     object.set("storeName", request.params.store);
     object.set("financialStatus", request.params.financial_status);
-    object.set("archived2", request.params.closed_at);
+    object.set("archived2", "2");
    
     object.save(null, {
         success: function(object){
