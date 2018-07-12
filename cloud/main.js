@@ -242,7 +242,7 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
       object.set("lineItems", request.params.line_items);
       object.set("storeName", request.params.store);
       object.set("financialStatus", request.params.financial_status);
-      if(typeof request.params.closed_at !== "null") {
+      if(typeof request.params.closed_at !== 'undefined') {
         object.set("archived", "2");
       }
 
@@ -263,41 +263,3 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
     }
   });
 }); 
-
- Parse.Cloud.define("averageStars", function(request, response) {
-  var Skus = Parse.Object.extend("Skus");
-  var query = new Parse.Query(Skus);
-  query.equalTo("storeName", request.params.movie);
-  query.find({
-    success: function(results){
-      if(results.length>0){
-        var user = results[0];
-        user.set("ExpirationDate","hi");
-        user.save(null, { useMasterKey: true }).then(
-            function(result){
-              response.success();
-            },
-            function(error){
-                console.log("Error: " + error.code + " " + error.message);
-              response.error('query error: '+ error.code + " : " + error.message);
-            });
-      }
-    },
-    error: function(error){
-            response.error('query error: '+ error.code + " : " + error.message);
-    }
-  });
-});
-
-//  Parse.Cloud.define("getProducts", function (request, response) {
-// //      Shopify.get('/admin/products.json', query_data, function(err, data, headers){
-// //          console.log(data); // Data contains product json information
-// //          console.log(headers); // Headers returned from request
-// //          console.log(err);
-// //      });
-// Shopify.get('/admin/products.json', query_data, function(err, data, headers){
-//                 console.log(data); // Data contains product json information
-//                 // console.log(headers); // Headers returned from request
-//             });
-//      response.success();
-//  });
