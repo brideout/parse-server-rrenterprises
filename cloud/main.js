@@ -172,7 +172,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
     if(!request.params.closed_at) {
       object.set("archived", undefined);
     } else {
-      object.set("archived", "2");
+      object.set("archived", request.params.closed_at);
     }
     
    
@@ -251,7 +251,7 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
       if(!request.params.closed_at) {
         object.set("archived", undefined);
       } else {
-        object.set("archived", "2");
+        object.set("archived", request.params.closed_at);
       }
 
       object.save(null, {
