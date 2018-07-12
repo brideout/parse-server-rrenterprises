@@ -242,7 +242,7 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
       object.set("lineItems", request.params.line_items);
       object.set("storeName", request.params.store);
       object.set("financialStatus", request.params.financial_status);
-      if(typeof request.params.closed_at !== null) {
+      if(typeof request.params.closed_at !== undefined) {
         object.set("archived", "2");
       }
 
