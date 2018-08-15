@@ -169,7 +169,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
     object.set("dateOrderedTime", request.params.dateOrderedTime);
     object.set("storeName", request.params.store);
     object.set("financialStatus", request.params.financial_status);
-    object.set("totalWeight", request.params.total_weight;
+    object.set("totalWeight", request.params.total_weight);
     if(!request.params.closed_at) {
       object.set("archived", undefined);
     } else {
