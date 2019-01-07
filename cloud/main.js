@@ -170,7 +170,7 @@ Parse.Cloud.define("saveOrder", function(request, response) {
     object.set("storeName", request.params.store);
     object.set("financialStatus", request.params.financial_status);
     object.set("totalWeight", request.params.total_weight);
-    object.set("returns", JSON.stringify(request.params.returns));
+    object.set("returns", JSON.stringify(request.params.refunds));
     if(!request.params.closed_at) {
       object.set("archived", undefined);
     } else {
@@ -250,7 +250,7 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
       object.set("lineItems", request.params.line_items);
       object.set("storeName", request.params.store);
       object.set("financialStatus", request.params.financial_status);
-      object.set("returns", JSON.stringify(request.params.returns));
+      object.set("refunds", JSON.stringify(request.params.refunds));
       if(!request.params.closed_at) {
         object.set("archived", undefined);
       } else {
