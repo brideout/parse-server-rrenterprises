@@ -246,7 +246,7 @@ Parse.Cloud.define("orderUpdated", function(request, response) {
           object.set('taxes', ["no"]);
       }
   //     object.set("storeName", store);
-      var refunds = JSON.stringifty(request.params.refunds);
+      var refunds = JSON.stringify(request.params.refunds);
       object.set('gateway', request.params.payment_gateway_names);
       object.set("lineItems", request.params.line_items);
       object.set("storeName", request.params.store);
