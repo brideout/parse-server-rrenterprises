@@ -6,7 +6,9 @@ var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
 var shopifyAPI = require('shopify-node-api');
 
-var databaseUri = 'mongodb://heroku_3ssnvgmm:c428mlsdi54hn3iskn2jq06hnj@ds115551-a0.mlab.com:15551,ds115551-a1.mlab.com:15551/heroku_3ssnvgmm?replicaSet=rs-ds115551';
+//var databaseUri = 'mongodb://heroku_3ssnvgmm:c428mlsdi54hn3iskn2jq06hnj@ds115551-a0.mlab.com:15551,ds115551-a1.mlab.com:15551/heroku_3ssnvgmm?replicaSet=rs-ds115551';
+var databaseUri = 'mongodb://transfer:270boat@iad2-c5-0.mongo.objectrocket.com:54012,iad2-c5-1.mongo.objectrocket.com:54012,iad2-c5-2.mongo.objectrocket.com:54012/heroku_3ssnvgmm?replicaSet=635fb6cb00a14028bc5c1a6b667ca535';
+
 
 
 var api = new ParseServer({
